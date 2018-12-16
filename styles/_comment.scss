@@ -1,0 +1,56 @@
+.comment_item {
+	padding: 12px 0;
+	.avatar_comment {
+		margin-right: 16px;
+		line-height: 32px;
+		img {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+	}
+	.body_comment {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1 0;
+		-ms-flex: 1 0;
+		flex: 1 0;
+		.user_comment {
+			color: rgba(0, 0, 0, 0.65);
+			margin-bottom: 4px;
+			font-size: 16px;
+			line-height: 22px;
+		}
+		.content_comment {
+			color: rgba(0, 0, 0, 0.45);
+			line-height: 22px;
+		}
+		.meta_comment {
+			&__item {
+				display: inline-block;
+				color: rgba(0, 0, 0, 0.45);
+				cursor: pointer;
+				padding: 0 8px;
+				position: relative;
+				font-size: 14px;
+				line-height: 22px;
+				text-align: center;
+				&::after {
+					background-color: #e8e8e8;
+					margin-top: -7px;
+					position: absolute;
+					top: 50%;
+					right: 0;
+					width: 1px;
+					height: 14px;
+					content: '';
+				}
+				&:last-child {
+					&::after {
+						width: 0px;
+						height: 0px;
+					}
+				}
+			}
+		}
+	}
+}

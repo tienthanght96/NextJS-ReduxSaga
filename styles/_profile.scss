@@ -1,0 +1,13 @@
+.user-detail {
+	padding-bottom: 2rem;
+	&__name {
+		font-size: 34px;
+		font-weight: 800;
+		text-transform: uppercase;
+		margin: 1rem 0;
+	}
+	&__email {
+		font-size: 18px;
+		font-style: italic;
+	}
+}
