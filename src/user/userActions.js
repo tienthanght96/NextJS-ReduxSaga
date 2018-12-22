@@ -19,6 +19,10 @@ export const FETCHED_MORE_BOOKMARK_ARTICLES = 'FETCHED_MORE_BOOKMARK_ARTICLES';
 export const FETCHED_MORE_BOOKMARK_ARTICLES_ERROR = 'FETCHED_MORE_BOOKMARK_ARTICLES_ERROR';
 
 
+export const FETCH_HISTORY_ARTICLES = 'FETCH_HISTORY_ARTICLES';
+export const FETCHING_HISTORY_ARTICLES = 'FETCHING_HISTORY_ARTICLES';
+export const FETCHED_HISTORY_ARTICLES = 'FETCHED_HISTORY_ARTICLES';
+
 export const userLogin = (data) => ({
   type: USER_LOGIN,
   data
@@ -74,3 +78,14 @@ export const fetchingMoreBookmarkArticles = () => ({
 export const fetchedMoreBookmarkArticlesError = () => ({
   type: FETCHED_MORE_BOOKMARK_ARTICLES,
 });
+
+export const fetchHistoryArticles = () => ({
+  type: FETCH_HISTORY_ARTICLES,
+})
+export const fetchingHistoryArticles = () => ({
+  type: FETCHING_HISTORY_ARTICLES
+})
+export const fetchedHistoryArticles = (data) => ({
+  type: FETCHED_HISTORY_ARTICLES,
+  data
+})

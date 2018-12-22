@@ -3,7 +3,7 @@ import { UserApi, ArticleApi } from '../api/ApiService';
 import {
   userLogining, userLoginSuccess, userLoginError,
   USER_LOGIN, USER_LOGIN_SUCCESS,
-  updateFavoriteCategorySuccess, updateFavoriteCategoryPending, UPDATE_FAVORITE_CATEGORIES, fetchedBookmarkArticles, FETCH_BOOKMARK_ARTICLES, fetchingBookmarkArticles, fetchingMoreBookmarkArticles, fetchedMoreBookmarkArticlesError, FETCH_MORE_BOOKMARK_ARTICLES
+  updateFavoriteCategorySuccess, updateFavoriteCategoryPending, UPDATE_FAVORITE_CATEGORIES, fetchedBookmarkArticles, FETCH_BOOKMARK_ARTICLES, fetchingBookmarkArticles, fetchingMoreBookmarkArticles, fetchedMoreBookmarkArticlesError, FETCH_MORE_BOOKMARK_ARTICLES, fetchingHistoryArticles, fetchedHistoryArticles, FETCH_HISTORY_ARTICLES
 } from './userActions';
 import { userSelector, bookmarkArticlesSelector } from './userSelector';
 import { formatInfoUserToSaveLocal } from '../utils/utils';
@@ -96,7 +96,7 @@ function* getBookmarkArticles(action){
     try {
       const response = yield call(ArticleApi.getBookmarkArticles, user.id, { limit, page });
       data.list = response;
-      data.hasLoadMore = response.length >=  10;
+      data.hasLoadMore = response.length >=  12;
       yield put(fetchedBookmarkArticles(data));
     } catch (error) {
       yield put(fetchedBookmarkArticles(data));
@@ -114,12 +114,26 @@ function* getMoreBookmarkArticles(action) {
     const response = yield call(ArticleApi.getBookmarkArticles, user.id, params);
     const data = {
       list: list.concat(response),
-      hasLoadMore: response.length >=  10
+      hasLoadMore: response.length >=  12
     };
     yield put(fetchedBookmarkArticles(data));
   } catch (error) {
     console.log(error)
     yield put(fetchedMoreBookmarkArticlesError());
+  }
+}
+
+function* getHistoryArticles(){
+  const user = yield select(userSelector);
+  if(user && user.id) {
+    yield put(fetchingHistoryArticles());
+    try {
+      const response = yield call(ArticleApi.getHistoryArticles, user.id);
+      yield put(fetchedHistoryArticles(response));
+    } catch (error) {
+      console.log(error)
+      yield put(fetchedHistoryArticles([]));
+    }
   }
 }
 
@@ -140,6 +154,9 @@ function* watchBookmarkArticles() {
 function* watchMoreBookmarkArticles() {
   yield takeLatest(FETCH_MORE_BOOKMARK_ARTICLES, getMoreBookmarkArticles)
 }
+function* watchHistorykArticles() {
+  yield takeLatest(FETCH_HISTORY_ARTICLES, getHistoryArticles)
+}
 
 export function* userSaga(){
   yield all([
@@ -148,5 +165,6 @@ export function* userSaga(){
     watchUpdateFavoriteCategories(),
     watchBookmarkArticles(),
     watchMoreBookmarkArticles(),
+    watchHistorykArticles(),
   ])
 }

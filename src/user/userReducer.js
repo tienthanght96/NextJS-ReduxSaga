@@ -11,10 +11,14 @@ const initialState = {
   bookmarkArticles: {
     isPending: false,
     list: [],
-    limit: 10,
+    limit: 12,
     page: 1,
     isLoadingMore: false,
     hasLoadMore: false,
+  },
+  historyArticles: {
+    isPending: false,
+    list: []
   }
 }
 
@@ -108,6 +112,24 @@ export const userReducer = (state = initialState, action) => {
       bookmarkArticles: {
         ...state.bookmarkArticles,
         isLoadingMore: false,
+      },
+    }
+  }
+  case ActionTypes.FETCHING_HISTORY_ARTICLES: {
+    return {
+      ...state,
+      historyArticles: {
+        ...state.historyArticles,
+        isPending: false,
+      },
+    }
+  }
+  case ActionTypes.FETCHED_HISTORY_ARTICLES: {
+    return {
+      ...state,
+      historyArticles: {
+        list: action.data,
+        isPending: false,
       },
     }
   }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withAppLoaded } from "../../hocs/withAppLoaded";
-import { userSelector, userFavoriteCategoriesSelector, bookmarkArticlesSelector } from "../userSelector";
+import { userSelector, userFavoriteCategoriesSelector, bookmarkArticlesSelector, historyArticlesSelector } from "../userSelector";
 import { toggleModalPersonalize } from "../../modal/modalActions";
-import { fetchBookmarkArticles, fetchMoreBookmarkArticles } from "../userActions";
+import { fetchBookmarkArticles, fetchMoreBookmarkArticles, fetchHistoryArticles } from "../userActions";
 import TabsProfile from "./TabsProfile";
 import { Card, Avatar } from "antd";
 import FacebookLoginButton from "../../components/FacebookLoginButton";
@@ -39,6 +39,7 @@ const mapStateToProps = (state) => ({
   user: userSelector(state),
   favoriteCategories: userFavoriteCategoriesSelector(state),
   bookmarkArticles: bookmarkArticlesSelector(state),
+  historyArticles: historyArticlesSelector(state),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -46,7 +47,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(toggleModalPersonalize({ isOpenModal, dataModal })),
   getBookmarkArticles: (data) => dispatch(fetchBookmarkArticles(data)),
   getMoreBookmarkArticles: ({ limit, page }) =>
-    dispatch(fetchMoreBookmarkArticles({ limit, page }))
+    dispatch(fetchMoreBookmarkArticles({ limit, page })),
+  getHistoryArticles: () =>
+    dispatch(fetchHistoryArticles()),
 
 })
 export default withAppLoaded(connect(mapStateToProps, mapDispatchToProps)(UserIndex));

@@ -77,7 +77,6 @@ export const ArticleApi = {
     }
   },
   getDetailArticle: async (article_id, userId = null) => {
-    console.log('userId', userId)
     try {
       const url = userId ? `/article/${userId}/${article_id}` : `/article/${article_id}`;
       const response = await ApiJavaService.get(url);
@@ -130,6 +129,18 @@ export const ArticleApi = {
     try {
       const url = `/article/bookmark/${user_id}`;
       const response = await ApiJavaService.get(url, { params });
+      if(response.data && isSuccessRequest(response.status)) {
+        return response.data;
+      }
+      throw response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getHistoryArticles: async (user_id) => {
+    try {
+      const url = `/user/history/${user_id}`;
+      const response = await ApiJavaService.get(url);
       if(response.data && isSuccessRequest(response.status)) {
         return response.data;
       }

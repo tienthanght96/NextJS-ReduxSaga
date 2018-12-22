@@ -30,7 +30,7 @@ class BookmarkArticles extends PureComponent {
   componentDidMount() {
     const user = this.props.user || null;
     if (user && user.id) {
-      this.props.getBookmarkArticles({ limit: 10, page: 1 });
+      this.props.getBookmarkArticles({ limit: 12, page: 1 });
     }
   }
 
@@ -40,7 +40,7 @@ class BookmarkArticles extends PureComponent {
       this.props.user &&
       this.props.user.id
     ) {
-      this.props.getBookmarkArticles({ limit: 10, page: 1 });
+      this.props.getBookmarkArticles({ limit: 12, page: 1 });
     }
   }
 
@@ -50,8 +50,7 @@ class BookmarkArticles extends PureComponent {
   }
 
   handleBookmarkSuccess = () => {
-    console.log('13123')
-    this.props.getBookmarkArticles({ limit: 10, page: 1 });
+    this.props.getBookmarkArticles({ limit: 12, page: 1 });
   }
 
   render() {
