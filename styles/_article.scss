@@ -45,9 +45,11 @@
                 }
                 &__sapo{
                     font-size: 0.9em;
+                    padding-left: 10px;
                 }
                 &__image{
                     overflow: hidden;
+                    max-height: 150px;
                     img{
                         max-width: 100%;
                     }
@@ -71,7 +73,7 @@
             p {
                 margin-bottom: 10px;
                 &:first-child{
-                    margin-top: 1rem;
+                    // margin-top: 1rem;
                 }
             }
             a {

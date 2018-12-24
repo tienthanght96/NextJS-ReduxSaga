@@ -3,6 +3,7 @@ import { isEmpty } from "lodash";
 import { connect } from "react-redux";
 import moment from "moment";
 import { withRouter } from "next/router";
+import Link from 'next/link'
 import { Row, Col, Spin } from "antd";
 
 import BodyContentArticle from "./BodyContentArticle";
@@ -10,7 +11,8 @@ import ListComment from "../../components/ListComment";
 import ButtonBookmark from "../../components/ButtonBookmark";
 import { fetchArticle } from "../articleActions";
 import { ArticleApi } from "../../api/ApiService";
-import { articleDetailSelector, isPendingArticleDetailSelector } from "../articleSelector";
+import { articleDetailSelector, isPendingArticleDetailSelector, relativeArticlesSelector } from "../articleSelector";
+import { formatCommentReplyTime } from "../../utils/utils";
 
 class ArticleDetail extends Component {
 
@@ -38,7 +40,7 @@ class ArticleDetail extends Component {
   };
 
   render() {
-    const { isPending, articleDetail } = this.props;
+    const { isPending, articleDetail, relativeArticles } = this.props;
     
     if(isPending){
       return (
@@ -62,8 +64,61 @@ class ArticleDetail extends Component {
           </section>
           <section className="article-detail__info">
             <Row type="flex" justify="start">
-              <Col><span className="article-detail__info__megazin" style={{ marginRight: 10 }}>{"Theo: " + articleDetail.megazine}</span></Col>
-              <Col><span className="article-detail__info__pushlish-date">{articleDetail.date ? moment(articleDetail.date).format("DD:MM:YYYY"): null}</span></Col>
+              <Col>
+                <i
+                  className={`icon ion-ios-paper`}
+                  style={{
+                    fontSize: 18,
+                    marginRight: 5,
+                    position: "relative",
+                    top: 2
+                  }}
+                />  
+                <span className="article-detail__info__megazin" style={{ marginRight: 10 }}>
+                  {"Theo: " + articleDetail.megazine}
+                </span>
+              </Col>
+              <Col>
+                <span className="article-detail__info__pushlish-date">
+                  <i
+                    className={`icon ion-ios-alarm`}
+                    style={{
+                      fontSize: 18,
+                      marginRight: 5,
+                      position: "relative",
+                      top: 2
+                    }}
+                  />  
+                  {formatCommentReplyTime(articleDetail.date / 1000) || null}
+                </span>
+              </Col>
+              <Col>
+                <Link
+                   href={{
+                    pathname: '/category',
+                    query: {
+                      id: articleDetail.category.id,
+                      code: articleDetail.category.code
+                    }
+                  }}
+                >
+                  <a style={{ margin: '0 10px' }} className="has-text-danger">
+                    <i
+                      className={`icon ion-ios-${articleDetail.category.icon}`}
+                      style={{
+                        fontSize: 18,
+                        marginRight: 5,
+                        position: "relative",
+                        top: 2
+                      }}
+                    />  
+                    <span className="article-detail__info__category">
+                      {articleDetail.category.name}
+                    </span>
+                  </a>
+                </Link>
+              </Col>
+              
               <Col>
                 <ButtonBookmark
                   article_id={articleDetail.id}
@@ -76,6 +131,8 @@ class ArticleDetail extends Component {
               <BodyContentArticle
                 imagesArticle={articleDetail.pictures}
                 bodyHtml={articleDetail.content || ''}
+                relativeArticles={relativeArticles}
+                article_id={articleDetail.id}
               />
               {   articleDetail.author &&
                   <section className="">
@@ -93,7 +150,8 @@ class ArticleDetail extends Component {
 }
 const mapStateToProps = (state) => ({
   articleDetail: articleDetailSelector(state),
-  isPending: isPendingArticleDetailSelector(state)
+  isPending: isPendingArticleDetailSelector(state),
+  relativeArticles: relativeArticlesSelector(state)
 })
 
 const mapDispatchToProps = dispatch => ({

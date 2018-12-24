@@ -26,7 +26,12 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     if(ctx.store) {
       // ctx.store.dispatch(appLoading());
-      ctx.store.dispatch(fetchCategories());
+      const userState = ctx.store.getState().user;
+      // console.log('userState', userState );
+      const userId = (userState && userState.user && userState.user.id)
+        ? userState.user.id
+        : null;
+      ctx.store.dispatch(fetchCategories({ userId }));
     }
     return {
       pageProps: {

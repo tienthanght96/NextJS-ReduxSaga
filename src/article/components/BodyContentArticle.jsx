@@ -16,7 +16,8 @@ export default class BodyContentArticle extends Component {
   componentDidUpdate(prevProps) {
     if(
       (this.props.bodyHtml !== prevProps.bodyHtml)||
-      (this.props.imagesArticle !== prevProps.imagesArticle)
+      (this.props.imagesArticle !== prevProps.imagesArticle) ||
+      (this.props.relativeArticles.list.length !== prevProps.relativeArticles.list.length)
     ){
       this.setBodyHtml(this.props.bodyHtml);
     }
@@ -78,7 +79,12 @@ export default class BodyContentArticle extends Component {
       indexInsertImage += 2;
     });
     if(shadowArrSentences.length - 4 >= 1) {
-      const quoteString = renderToString(<QuoteOtherArticle />);
+      const { list } = this.props.relativeArticles;
+      const listWithoutCurrentArticle = list.filter(item => item.id !== this.props.article_id);
+      const firstRelativeArticle = listWithoutCurrentArticle && listWithoutCurrentArticle.length > 0
+        ? listWithoutCurrentArticle[0]
+        : null;
+      const quoteString = renderToString(<QuoteOtherArticle firstRelativeArticle={firstRelativeArticle} />);
       shadowArrSentences.splice(shadowArrSentences.length - 4 , 0, quoteString)
     }
     shadowArrSentences = shadowArrSentences.map(setence => {

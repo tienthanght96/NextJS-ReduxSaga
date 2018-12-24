@@ -46,7 +46,7 @@ class HomeMostView extends Component {
     return (
       <div>
         <div className="box-title">
-          <h2 className="title-left">Đọc nhiều nhất</h2>
+          <h2 className="title-left">Tin mới nhất</h2>
         </div>
         { isPending ? (
           Array.from(Array(10).keys()).map(item => (

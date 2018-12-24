@@ -38,12 +38,12 @@ function* userLoginServer(action){
     yield put(userLoginSuccess(dataUserFormated));
     // hide modal and app loaded
     yield put(toggleModalOverflow({ isOpenModal: false, dataModal: {} }))
-    yield put(appLoaded());
+    // yield put(appLoaded());
   } catch (error) {
     console.log('error login', error)
     yield put(userLoginError(error.message));
     yield put(toggleModalOverflow({ isOpenModal: false, dataModal: {} }));
-    yield put(appLoaded());
+    // yield put(appLoaded());
   }
 }
 
@@ -56,7 +56,6 @@ function* getFavoriteCategoriesUser() {
       const favoriteCategories = yield call(UserApi.getFavoriteCategoryForUser, user.id);
       yield put(updateFavoriteCategorySuccess(favoriteCategories));
       if(Array.isArray(favoriteCategories) && favoriteCategories.length > 0) {
-       
         const topCategoryArticles = {};
         favoriteCategories.forEach(category => {
           topCategoryArticles[category.id] = {
@@ -65,11 +64,17 @@ function* getFavoriteCategoriesUser() {
             list: []
           }
         });
-        yield put(setListCategoryFetch(topCategoryArticles))
+        yield put(setListCategoryFetch(topCategoryArticles));
+        yield put(appLoaded());
       }
     } catch (error) {
       yield put(updateFavoriteCategorySuccess([]));
+      yield put(appLoaded());
+
     }
+  } else {
+    yield put(appLoaded());
+    yield put(updateFavoriteCategorySuccess([]));
   }
 }
 

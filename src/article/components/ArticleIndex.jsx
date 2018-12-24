@@ -4,6 +4,7 @@ import ListMostPopularArticles from "../../home/components/HomeMostViews";
 import ListNewestArticles from "./NewestArticles";
 import RelativeArticles from "./RelativeArticles";
 import ArticleDetail from "./ArticleDetail";
+import { withAppLoaded } from '../../hocs/withAppLoaded';
 
 class ArticleIndex extends Component {
   render() {
@@ -18,7 +19,7 @@ class ArticleIndex extends Component {
             <ListMostPopularArticles />
           </Col>
           <Col xs={24} sm={24} style={{ marginTop: '1rem' }}>
-            <RelativeArticles />
+            <RelativeArticles article_id={this.props.article_id}/>
           </Col>
         </Row>
         <BackTop />
@@ -27,4 +28,4 @@ class ArticleIndex extends Component {
   }
 }
 
-export default ArticleIndex;
+export default withAppLoaded(ArticleIndex);
