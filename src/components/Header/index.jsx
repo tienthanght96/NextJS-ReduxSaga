@@ -204,16 +204,7 @@ class HeaderContainer extends PureComponent {
             <div className="leftNav">
               <Link  href="/" >
                 <a>
-                  <svg className="logo--landscape" width="152.4" height="30" viewBox="0 0 508 100" data-reactid=".0.0.0.0.$=10:0">
-                    <g id="Page-1" stroke="none" fill="none" data-reactid=".0.0.0.0.$=10:0.0">
-                      <g id="Group" data-reactid=".0.0.0.0.$=10:0.0.0">
-                        <rect id="Rectangle" fill="#FFFFFF" x="3" y="4" width="93" height="93" data-reactid=".0.0.0.0.$=10:0.0.0.0" />
-                        <g id="Horizontal-Logo_DIGITAL_RED_100px" data-reactid=".0.0.0.0.$=10:0.0.0.1">
-                          <path d="M0,0 L0,100 L100,100 L100,0 L0,0 Z M80,40 L60,40 L60,60 L40,60 L40,80 L20,80 L20,20 L80,20 L80,40 Z" id="Shape" fill="#F52828" data-reactid=".0.0.0.0.$=10:0.0.0.1.9" />
-                        </g>
-                      </g>
-                    </g>
-                  </svg>
+                  <img style={{ maxWidth: 40, marginRight: 10 }} src="https://antd-admin.zuiidea.com/logo.svg"/>
                 </a>
               </Link>
               {

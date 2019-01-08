@@ -6,6 +6,9 @@
 @import './components/_header_category';
 @import './components/_button_loade_more';
 @import './components/_modal_personalize';
+@import './admin/login';
+@import './admin/sidebar';
+@import './admin/header-admin';
 @import './_profile';
 @import './_home';
 @import './_comment';
@@ -163,4 +166,18 @@ button {
 	&-error {
 		background-color: #f5222d !important;
 	}
+}
+.contentInner {
+	background: #fff;
+	padding: 24px;
+	box-shadow: 4px 4px 20px 0 rgba(0,0,0,.01);
+	min-height: calc(100vh - 230px);
+	position: relative;
+}
+.button {
+	cursor: pointer;
+}
+
+.margin-right {
+	margin-right: 16px;
 }
