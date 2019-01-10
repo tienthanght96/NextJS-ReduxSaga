@@ -46,8 +46,22 @@ class HomeMostView extends Component {
     const { isPending, list } = mostViewsArticles;
     return (
       <div>
-        <div className="box-title">
+        <div className="box-title flex-row-space-between">
           <h2 className="title-left">Đọc nhiều nhất</h2>
+          <div className="right-box-title">
+            {/* <div className="pin-category" 
+              onClick={() =>{
+              }}
+            >
+              <Icon type="pushpin-o" className="header-category-icon" />
+            </div> */}
+            <Link href="/mostviews">
+              <a className="right-box-title-link" >
+                <span>Xem tất cả</span>
+                <Icon type="arrow-right" className="header-category-icon" style={{ marginLeft: 5 }}/>
+              </a>
+            </Link>
+          </div>
         </div>
         { isPending ? (
           Array.from(Array(10).keys()).map(item => (

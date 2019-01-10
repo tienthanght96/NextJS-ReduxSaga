@@ -15,16 +15,16 @@ class HeaderCategory extends Component {
 			<div className="box-title flex-row-space-between">
 				<h2 className="title-left">{title}</h2>
 				<div className="right-box-title">
-					<div className="pin-category" 
+					{/* <div className="pin-category" 
 						onClick={() =>{
 						}}
 					>
 						<Icon type="pushpin-o" className="header-category-icon" />
-					</div>
+					</div> */}
 					<Link {...linkProps}>
 						<a className="right-box-title-link" >
-							<span>Đọc thêm</span>
-							<Icon type="arrow-right" className="header-category-icon"/>
+							<span>Xem thêm</span>
+							<Icon type="arrow-right" className="header-category-icon" style={{ marginLeft: 5 }}/>
 						</a>
 					</Link>
 				</div>

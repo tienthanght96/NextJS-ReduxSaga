@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import LayoutAdmin from '../../../src/admin/components/LayoutAdmin';
-import ArticlesList from '../../../src/admin/components/articles/ArticlesList';
 
-class IndexAdminArticles extends Component {
+class IndexEditArticle extends Component {
   render() {
     return (
       <LayoutAdmin>
-        <ArticlesList />
+        Edit article
       </LayoutAdmin>
     );
   }
 }
 
-export default IndexAdminArticles;
+export default IndexEditArticle;

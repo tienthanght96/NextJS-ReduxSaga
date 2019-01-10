@@ -2,9 +2,9 @@ import axios from 'axios';
 export const IS_JAVA_API = 'IS_JAVA_API';
 export const IS_PYTHON_API = 'IS_PYTHON_API';
 
-export const API_JAVA_URL = 'https://newsjavaapi.azurewebsites.net';
-// export const API_JAVA_URL = 'http://192.168.1.100:8080/';
-export const API_PYTHON_URL = 'http://192.168.1.100:8181/python_api';
+// export const API_JAVA_URL = 'https://newsjavaapi.azurewebsites.net';
+export const API_JAVA_URL = 'http://localhost:8080/';
+export const API_PYTHON_URL = 'http://localhost:8181/python_api';
 
 export const BASE_URL = API_JAVA_URL;
 const CancelToken = axios.CancelToken;

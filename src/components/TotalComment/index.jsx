@@ -40,12 +40,15 @@ class TotalCommentArticle extends PureComponent {
 
   render() {
     const { totalComment } = this.state;
+    const { isHideIcon } = this.props;
     return (
       <span>
-        <i
-          className="icon ion-ios-chatbubbles"
-          style={{ fontSize: 20, marginRight: 5, position: "relative", top: 2 }}
-        />
+        {!isHideIcon &&
+          <i
+            className="icon ion-ios-chatbubbles"
+            style={{ fontSize: 20, marginRight: 5, position: "relative", top: 2 }}
+          />
+        }
         {totalComment || 0}
       </span>
     );

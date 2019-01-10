@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import Link from 'next/link'
+import moment from 'moment'
 import { Table, Divider, Tag , Input, Button, Icon, Avatar } from "antd";
+import { fake_data_articles } from "../../../utils/config";
+import TotalCommentArticle from "../../../components/TotalComment";
 
-class UsersTable extends Component {
+class ArticlesTable extends Component {
   state = {
     searchText: '',
   };
@@ -44,7 +48,7 @@ class UsersTable extends Component {
         setTimeout(() => this.searchInput.select());
       }
     },
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <a style={{ maxWidth: 200, overflow: 'hidden' }} href="javascript:;">{text}</a>,
   })
 
   handleSearch = (selectedKeys, confirm) => {
@@ -60,47 +64,86 @@ class UsersTable extends Component {
   getColumns = () => {
     return [
       {
-        title: "Avatar",
-        dataIndex: "picture",
-        key: "picture",
-        render: text => <Avatar src={text} shape="circle"/>
-      },
-      {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
-        // render: text => <a href="javascript:;">{text}</a>
-        ...this.getColumnSearchProps('name'),
-      },
-      {
-        title: "Email",
-        dataIndex: "email",
-        key: "email"
-      },
-      {
-        title: "User type",
-        key: "user_type",
-        dataIndex: "user_type",
-        render: user_type => (
-          <span>
-            <Tag color={user_type === 1 ? "blue" : "magenta"}>
-              {user_type === 1 ? "Facebook" : "Anonymous"}
-            </Tag>
-          </span>
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
+        render: text => (
+          <Link
+            href={{
+              pathname: '/admin/article/',
+              query: {
+                id: text,
+              }
+            }}
+          >
+            <a>{text}</a>
+          </Link>
+          
         )
+      },
+      {
+        title: "Title",
+        dataIndex: "title",
+        key: "title",
+        width: 200,
+        // render: text => <a href="javascript:;">{text}</a>
+        ...this.getColumnSearchProps('title'),
+      },
+      {
+        title: "Date",
+        dataIndex: "date",
+        key: "date"
+      },
+      {
+        title: "Category",
+        dataIndex: "category",
+        key: "category"
+      },
+      {
+        title: "Views",
+        dataIndex: "view",
+        key: "view"
+      },
+      {
+        title: "Comments",
+        dataIndex: "id",
+        key: "id",
+        render: text => <TotalCommentArticle article_id={text} isHideIcon={true}/>
       },
       {
         title: "",
         key: "action",
         render: (dataCell, record) => (
           <span>
-            <a href="javascript:;">
-              <Icon type="eye" />
-            </a>
+            <Link
+              href={{
+                pathname: '/admin/article',
+                query: {
+                  id: dataCell.id,
+                }
+              }}
+            >
+              <a>
+                <Icon type="eye" />
+              </a>
+            </Link>
             <Divider type="vertical" />
+            <Link
+              href={{
+                pathname: '/admin/article/edit',
+                query: {
+                  id: dataCell.id,
+                }
+              }}
+            >
+              <a>
+                <Icon type="edit" />
+              </a>
+            </Link>
+            {/* <Divider type="vertical" />
             <span className="button has-text-danger">
               <Icon type="delete" />
-            </span>
+            </span> */}
           </span>
         )
       }
@@ -108,29 +151,11 @@ class UsersTable extends Component {
   };
 
   getData = () => {
-    return [
-      {
-        key: "1",
-        name: "John Brown",
-        email: 'thangtran@gmail.com',
-        picture: "http://dummyimage.com/100x100/a3f279/757575.png&text=s",
-        user_type: 1
-      },
-      {
-        key: "2",
-        name: "Jim Green",
-        email: '',
-        picture: "http://dummyimage.com/100x100/a3f279/757575.png&text=a",
-        user_type: 2
-      },
-      {
-        key: "3",
-        name: "Joe Black",
-        email: '',
-        picture: "http://dummyimage.com/100x100/a3f279/757575.png&text=t",
-        user_type: 2
-      }
-    ];
+    return fake_data_articles.map(article => ({
+      ...article,
+      key: article.id,
+      date: moment(article.date).format("DD-MM-YYYY")
+    }));
   };
   
   render() {
@@ -151,4 +176,4 @@ class UsersTable extends Component {
   }
 }
 
-export default UsersTable;
+export default ArticlesTable;

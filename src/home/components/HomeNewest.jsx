@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ContentLoader from "react-content-loader";
-
+import Link from 'next/link'
+import { Icon } from "antd";
 import { formatCommentReplyTime } from "../../utils/utils";
 import ArticleCard from "../../components/ArticleCard";
 import ButtonLoadMore from "../../components/ButtonLoadmore";
@@ -56,8 +57,22 @@ class HomeNewest extends Component {
     return (
       <div style={{ marginBottom: "1.5rem" }}>
         <div className="col-md-9">
-          <div className="box-title">
-            <h2 className="title-left">Tin Mới nhất</h2>
+          <div className="box-title flex-row-space-between">
+            <h2 className="title-left">Tin mới nhất</h2>
+            <div className="right-box-title">
+              {/* <div className="pin-category" 
+                onClick={() =>{
+                }}
+              >
+                <Icon type="pushpin-o" className="header-category-icon" />
+              </div> */}
+              <Link href="/newest">
+                <a className="right-box-title-link" >
+                  <span>Xem tất cả</span>
+                  <Icon type="arrow-right" className="header-category-icon" style={{ marginLeft: 5 }}/>
+                </a>
+              </Link>
+            </div>
           </div>
           {isPending
             ? Array.from(Array(6).keys()).map(item => (
