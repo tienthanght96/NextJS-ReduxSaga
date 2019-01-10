@@ -40,7 +40,7 @@ const HomeTopCategoryListItem = ({ isPending, list, ...rest }) => {
         }}
       />
       { (isPending)
-        ? <Row type="flex" justify="start" >
+        ? <Row type="flex" justify="start" className="overflow-hidden">
             { [1,2,3,4].map((item) => (
                 <Col key={item} sm={6} md={6} lg={6}  style={{padding: '1rem 1rem 1rem 0'}}>
                   <Loader/>

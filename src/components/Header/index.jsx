@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import Link from 'next/link';
-import { Menu, Dropdown, Affix, Icon} from 'antd';
+import { Menu, Dropdown, Affix, Icon, Avatar} from 'antd';
 import queryString from 'query-string';
 import { isEmpty, isEqual } from 'lodash';
 import { toggleModalPersonalize, toggleModalOverflow, toggleModalLogin } from "../../modal/modalActions";
@@ -224,9 +224,9 @@ class HeaderContainer extends PureComponent {
                   ? <>
                       <Link href='/profile'>
                         <a>
-                        { !isEmpty(user) && user.username 
-                          ? user.username.substring(0,1) 
-                          : 'A'
+                        { !isEmpty(user) && user.picture 
+                          ? <Avatar src={user.picture} shape="square"/>
+                          : <Avatar src="http://dummyimage.com/100x100/a3f279/757575.png&text=a" shape="square" />
                         }
                         </a>
                       </Link>

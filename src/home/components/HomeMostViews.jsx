@@ -46,7 +46,7 @@ class HomeMostView extends Component {
     const { isPending, list } = mostViewsArticles;
     return (
       <div>
-        <div className="box-title flex-row-space-between">
+        <div className="box-title flex-row-space-between overflow-hidden">
           <h2 className="title-left">Đọc nhiều nhất</h2>
           <div className="right-box-title">
             {/* <div className="pin-category" 

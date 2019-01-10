@@ -56,7 +56,7 @@ class HomeNewest extends Component {
 
     return (
       <div style={{ marginBottom: "1.5rem" }}>
-        <div className="col-md-9">
+        <div className="col-md-9 overflow-hidden">
           <div className="box-title flex-row-space-between">
             <h2 className="title-left">Tin mới nhất</h2>
             <div className="right-box-title">

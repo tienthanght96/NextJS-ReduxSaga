@@ -47,7 +47,7 @@ class BookmarkArticles extends PureComponent {
     const { isPending, list } = this.props.historyArticles;
     if (isPending) {
       return (
-        <Row type="flex" justify="start">
+        <Row type="flex" justify="start" className="overflow-hidden">
           {[1, 2, 3, 4].map(item => (
             <Col
               key={item}

@@ -53,7 +53,7 @@ class IndexMostViewsArticles extends Component {
             <div className="box-title">
               <h2 className="title-left">Đọc nhiều nhất</h2>
             </div>
-            <Row type={"flex"}>
+            <Row type={"flex"} className="overflow-hidden">
             {isPending
               ? Array.from(Array(16).keys()).map(item => (
                   <Col key={item} sm={12} md={6} lg={6}  style={{padding: '1rem 1rem 1rem 0'}}>

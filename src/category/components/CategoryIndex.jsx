@@ -53,7 +53,7 @@ class CategoryIndex extends Component {
     const { isPending, list, hasLoadMore, isLoadingMore } = categoryArticles;
     return (
       <div>
-        <Row type="flex" justify="start" >
+        <Row type="flex" justify="start" className="overflow-hidden">
           { isPending
             ? Array.from(Array(16).keys()).map((item) => (
                 <Col key={item} sm={12} md={6} lg={6}  style={{padding: '1rem 1rem 1rem 0'}}>

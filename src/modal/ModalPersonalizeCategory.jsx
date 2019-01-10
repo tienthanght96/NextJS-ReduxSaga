@@ -157,7 +157,7 @@ class IndexPersonalizeCategory extends Component {
       >
         <div className="container-personalize text-left p-3">
           <div className="content-personalize">
-            <div className="container-button-skip">
+            {/* <div className="container-button-skip">
               <Button
                 type="danger"
                 className="skip-now"
@@ -165,7 +165,7 @@ class IndexPersonalizeCategory extends Component {
               >
                 Bỏ qua
               </Button>
-            </div>
+            </div> */}
             <h3 className="title">Cá nhân hóa sở thích</h3>
             <p>Chúng tôi sẽ chọn những bài viết theo chủ đề mà bạn chọn</p>
             <div className="container-search">

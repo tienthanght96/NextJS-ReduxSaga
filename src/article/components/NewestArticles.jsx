@@ -44,13 +44,13 @@ class HomeMostView extends Component {
     const { newestArticles } = this.props;
     const { isPending, list } = newestArticles;
     return (
-      <div>
+      <div className="overflow-hidden">
         <div className="box-title">
           <h2 className="title-left">Tin mới nhất</h2>
         </div>
         { isPending ? (
           Array.from(Array(10).keys()).map(item => (
-            <div key={item}>
+            <div key={item} >
               <Loader key={item} />
             </div>
           ))
