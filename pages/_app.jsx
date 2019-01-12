@@ -14,6 +14,7 @@ import { dataServerForAnonymousUser } from '../src/utils/utils'
 import { appLoading, appLoaded, fetchCategories } from '../src/root/rootActions';
 import { anonymousLogin } from '../src/lib/firebaseLib';
 import { userLoginSuccess, userLogout, userLogin } from '../src/user/userActions';
+import Footer from '../src/components/Footer';
 
 Router.events.on('routeChangeStart', (url) => {
   Nprogress.start();
@@ -129,14 +130,22 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, store } = this.props;
     const state = store.getState();
-    const { root } = state;
+    const { root, home } = state;
     return (
       <Container>
         <Head>
-          <title>News Application</title>
+          <title>Megga News - Website tổng hợp và cá nhân hoá đọc báo</title>
         </Head>
         <Provider store={store}>
           <Component {...pageProps} />
+          <Footer
+            categories={root.categories || []}
+            newestList={
+              home.mostViewsArticles && home.mostViewsArticles.list
+              ? home.mostViewsArticles.list
+              : []
+            }
+          />
         </Provider>
       </Container>
     )

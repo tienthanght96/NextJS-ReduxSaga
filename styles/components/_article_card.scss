@@ -70,6 +70,7 @@ article.post-item.post-tran.horizontal {
 }
 .post-image-lazy.horizontal {
 	height: 130px;
+	border-radius: 5px;
 }
 .bg-rgb.horizontal {
 	position: absolute;
@@ -82,6 +83,7 @@ article.post-item.post-tran.horizontal {
 	margin: auto;
 	background: #00000054;
 	opacity: 1;
+	border-radius: 5px;
 	pointer-events: none;
 }
 .post-image-lazy {
@@ -94,6 +96,7 @@ article.post-item.post-tran.horizontal {
 }
 .article-image {
 	// height: 195px;
+	border-radius: 5px;
 	position: relative;
 }
 .article-content-horizontal .entry-header h3.entry-title {
@@ -155,6 +158,7 @@ article.post-item.post-tran-short-vertical {
 	height: 155px;
 	overflow: hidden;
 	position: relative;
+	border-radius: 5px;
 }
 .article-image-short-vertical {
 	height: 155px;

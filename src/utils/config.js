@@ -1,5 +1,6 @@
 export const asserts = {
-	noImage: require('../../static/img/no_image_available.jpg')
+	noImage: require('../../static/img/no_image_available.jpg'),
+	whiteLogo: require('../../static/img/bold-media-logo.png'),
 }
 
 export const fake_data_articles = [{

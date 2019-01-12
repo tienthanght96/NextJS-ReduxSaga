@@ -10,7 +10,11 @@ export default class MyDocument extends Document {
 
 					<meta name="theme-color" content="#673ab7" />
 					<link rel="manifest" href="static/manifest.json" />
-					<link rel="icon" href="static/img/favicon.ico" />
+					{/* <link rel="icon" href="static/img/favicon.ico" /> */}
+					<link rel="icon" href="static/img/favicon-80px.png" />
+					<link rel="icon" href="static/img/favicon-80px.png" sizes="32x32" />
+					<link rel="icon" href="static/img/favicon-80px.png" sizes="192x192" />
+					<link rel="apple-touch-icon-precomposed" href="static/img/favicon-80px.png" />
 					<meta name="title" content="News Web Application" />
 					<meta name="description" content="Next News App" />
 					<link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet" />

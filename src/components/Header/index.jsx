@@ -204,7 +204,7 @@ class HeaderContainer extends PureComponent {
             <div className="leftNav">
               <Link  href="/" >
                 <a>
-                  <img style={{ maxWidth: 40, marginRight: 10 }} src="https://antd-admin.zuiidea.com/logo.svg"/>
+                  <img style={{ maxWidth: 40, marginRight: 10, position: 'relative', top: -5 }} src="/static/img/bold-news-logo-red.png"/>
                 </a>
               </Link>
               {

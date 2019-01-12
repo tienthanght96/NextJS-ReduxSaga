@@ -1,0 +1,79 @@
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-family: Poppins;
+  font-weight: 400;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  border-bottom: 0 none;
+  background-image: url('/static/img/bg_default_footer.jpg');
+  &__wrapper {
+    border-bottom-width: 1px;
+    border-bottom-style: none;
+    padding-top: 20px;
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .title_footer {
+    color: #fff;
+    font-weight: bold;
+    i {
+      font-size: 20px;
+    }
+    span {
+      font-size: 24px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    &__image {
+      max-width: 40px;
+      position: relative;
+      top: -5px;
+      margin-right: 10px;
+    }
+  }
+  hr {
+    margin: 20px 0;
+    color: #f5222d;
+  }
+  .footer_col {
+    padding: 20px;
+  }
+  &__bottom {
+    text-align: center;
+    background: #58575785;
+    padding: 10px 0;
+  }
+}
+.footer__lasted-news {
+  &__item {
+    color: #fff;
+    font-size: 14px;
+    .news__image {
+      width: 150px;
+      height: 85px;
+      border-radius:  3px;
+    }
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.megga_info {
+  p {
+    margin-bottom: 10px;
+    i {
+      margin-right: 10px;
+      display: inline-block;
+    }
+  }
+}
+.footer__sendmail {
+  button {
+    border-color: #f5222d !important;
+
+  }
+}

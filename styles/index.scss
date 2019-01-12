@@ -3,6 +3,7 @@
 @import './components/_overlay';
 @import './components/_article_card';
 @import './components/_header';
+@import './components/footer';
 @import './components/_header_category';
 @import './components/_button_loade_more';
 @import './components/_modal_personalize';
@@ -15,6 +16,8 @@
 @import './_article';
 
 $color: #2ecc71;
+$danger-color: #f5222d;
+
 $size-1: 3rem !default;
 $size-2: 2.5rem !default;
 $size-3: 2rem !default;
@@ -176,6 +179,9 @@ button {
 }
 .button {
 	cursor: pointer;
+}
+img {
+	max-width: 100%;
 }
 
 .margin-right {

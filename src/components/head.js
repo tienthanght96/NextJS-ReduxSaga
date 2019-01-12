@@ -17,8 +17,6 @@ const Head = props => (
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* <link rel="icon" sizes="192x192" href="/static/touch-icon.png" /> */}
     {/* <link rel="apple-touch-icon" href="/static/touch-icon.png" /> */}
-    {/* <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" /> */}
-    {/* <link rel="icon" href="/static/favicon.ico" /> */}
     <meta property="og:url" content={props.url || defaultOGURL} />
     <meta property="og:title" content={props.title || ''} />
     <meta
@@ -35,7 +33,6 @@ const Head = props => (
 
     <meta name="theme-color" content="#673ab7" />
     <link rel="manifest" href="static/manifest.json" />
-    <link rel="icon" href="static/img/favicon.ico" />
     <meta name="title" content="News Web Application" />
     <meta name="description" content="Next News App" />
     <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet" />
