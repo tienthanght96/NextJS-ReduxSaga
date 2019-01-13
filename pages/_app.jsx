@@ -15,6 +15,7 @@ import { appLoading, appLoaded, fetchCategories } from '../src/root/rootActions'
 import { anonymousLogin } from '../src/lib/firebaseLib';
 import { userLoginSuccess, userLogout, userLogin } from '../src/user/userActions';
 import Footer from '../src/components/Footer';
+import { ArticleApi } from '../src/api/ApiService';
 
 Router.events.on('routeChangeStart', (url) => {
   Nprogress.start();
@@ -34,14 +35,35 @@ class MyApp extends App {
         : null;
       ctx.store.dispatch(fetchCategories({ userId }));
     }
-    return {
-      pageProps: {
-        // Call page-level getInitialProps
-        ...(Component.getInitialProps
-          ? await Component.getInitialProps(ctx)
-          : {})
-      }
+    try {
+      const newestList = await ArticleApi.getNewestListArticle(1, 5, null);
+      return {
+        pageProps: {
+          // Call page-level getInitialProps
+          ...(Component.getInitialProps
+            ? await Component.getInitialProps(ctx)
+            : {})
+        },
+        newestList
+      };
+    } catch (error) {
+      return {
+        pageProps: {
+          // Call page-level getInitialProps
+          ...(Component.getInitialProps
+            ? await Component.getInitialProps(ctx)
+            : {})
+        }
+      };
     }
+    // return {
+    //   pageProps: {
+    //     // Call page-level getInitialProps
+    //     ...(Component.getInitialProps
+    //       ? await Component.getInitialProps(ctx)
+    //       : {})
+    //   }
+    // }
   }
 
   async componentWillMount(){
@@ -128,9 +150,9 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store, newestList } = this.props;
     const state = store.getState();
-    const { root, home } = state;
+    const { root } = state;
     return (
       <Container>
         <Head>
@@ -140,11 +162,7 @@ class MyApp extends App {
           <Component {...pageProps} />
           <Footer
             categories={root.categories || []}
-            newestList={
-              home.mostViewsArticles && home.mostViewsArticles.list
-              ? home.mostViewsArticles.list
-              : []
-            }
+            newestList={newestList}
           />
         </Provider>
       </Container>

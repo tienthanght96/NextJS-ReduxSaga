@@ -46,7 +46,7 @@ class HomeMostView extends Component {
     const { isPending, list } = mostViewsArticles;
     return (
       <div>
-        <div className="box-title flex-row-space-between overflow-hidden">
+        <div className="box-title flex-row-space-between">
           <h2 className="title-left">Đọc nhiều nhất</h2>
           <div className="right-box-title">
             {/* <div className="pin-category" 
@@ -63,59 +63,61 @@ class HomeMostView extends Component {
             </Link>
           </div>
         </div>
-        { isPending ? (
-          Array.from(Array(10).keys()).map(item => (
-            <div key={item}>
-              <Loader key={item} />
-            </div>
-          ))
-        ) : (
-          <List
-            itemLayout="horizontal"
-            dataSource={list || []}
-            loading={list.length < 1}
-            locale=""
-            renderItem={item => (
-              <List.Item>
-                <Skeleton avatar title={false} loading={item.loading} active>
-                  <List.Item.Meta
-                    avatar={
-                      <div
-                        style={{
-                          backgroundImage: `url(${item.picture ||asserts.noImage})`,
-                          backgroundSize: item.picture ? "contain" : "contain",
-                          width: 150,
-                          height: 85
-                        }}
-                      />
-                    }
-                    title={
-                      <Link href={`/article?id=${item.id}`}>
-                        <a className="has-text-weight-bold">{item.title}</a>
-                      </Link>
-                    }
-                    description={
-                      item.date ? (
-                        <div>
-                          <Icon
-                            type="clock-circle"
-                            theme="outlined"
-                            style={{ marginRight: 8 }}
-                          />
-                          <span className="has-text-danger" style={{ marginRight: 10 }}>
-                            {formatCommentReplyTime(+item.date / 1000)}
-                          </span>
-                          <TotalCommentArticle article_id={item.id} />
-											    <ButtonBookmark article_id={item.id} checkBookmark={item.checkBookmark} />
-                        </div>
-                      ) : null
-                    }
-                  />
-                </Skeleton>
-              </List.Item>
-            )}
-          />
-        )}
+        <div className="overflow-hidden">
+          { isPending ? (
+            Array.from(Array(10).keys()).map(item => (
+              <div key={item}>
+                <Loader key={item} />
+              </div>
+            ))
+          ) : (
+            <List
+              itemLayout="horizontal"
+              dataSource={list || []}
+              loading={list.length < 1}
+              locale=""
+              renderItem={item => (
+                <List.Item>
+                  <Skeleton avatar title={false} loading={item.loading} active>
+                    <List.Item.Meta
+                      avatar={
+                        <div
+                          style={{
+                            backgroundImage: `url(${item.picture ||asserts.noImage})`,
+                            backgroundSize: item.picture ? "contain" : "contain",
+                            width: 150,
+                            height: 85
+                          }}
+                        />
+                      }
+                      title={
+                        <Link href={`/article?id=${item.id}`}>
+                          <a className="has-text-weight-bold">{item.title}</a>
+                        </Link>
+                      }
+                      description={
+                        item.date ? (
+                          <div>
+                            <Icon
+                              type="clock-circle"
+                              theme="outlined"
+                              style={{ marginRight: 8 }}
+                            />
+                            <span className="has-text-danger" style={{ marginRight: 10 }}>
+                              {formatCommentReplyTime(+item.date / 1000)}
+                            </span>
+                            <TotalCommentArticle article_id={item.id} />
+                            <ButtonBookmark article_id={item.id} checkBookmark={item.checkBookmark} />
+                          </div>
+                        ) : null
+                      }
+                    />
+                  </Skeleton>
+                </List.Item>
+              )}
+            />
+          )}
+        </div>
       </div>
     );
   }

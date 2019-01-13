@@ -13,6 +13,7 @@ import { fetchArticle } from "../articleActions";
 import { ArticleApi } from "../../api/ApiService";
 import { articleDetailSelector, isPendingArticleDetailSelector, relativeArticlesSelector } from "../articleSelector";
 import { formatCommentReplyTime } from "../../utils/utils";
+import { Loading } from "../../components/Loading";
 
 class ArticleDetail extends Component {
 
@@ -45,7 +46,8 @@ class ArticleDetail extends Component {
     if(isPending){
       return (
         <div className="loading-page">
-          <Spin size="large" />
+          {/* <Spin size="large" /> */}
+          <Loading />
           <div className="loading-page__text">Đang tải...</div>
         </div>
       )

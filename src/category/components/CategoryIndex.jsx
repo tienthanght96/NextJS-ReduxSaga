@@ -8,6 +8,8 @@ import ButtonLoadMore from '../../components/ButtonLoadmore';
 import ArticleCard from '../../components/ArticleCard';
 import { formatCommentReplyTime } from '../../utils/utils';
 import { withAppLoaded } from '../../hocs/withAppLoaded';
+import Head from '../../components/head';
+import { fake_data_categories } from '../../utils/config';
 
 function Loader(){
 	return (
@@ -51,8 +53,10 @@ class CategoryIndex extends Component {
   render() {
     const { categoryArticles } = this.props;
     const { isPending, list, hasLoadMore, isLoadingMore } = categoryArticles;
+    const category = fake_data_categories.find(c => c.id === +this.props.category_id );
     return (
       <div>
+        <Head title={category ? category.name : "Danh mục" }/>
         <Row type="flex" justify="start" className="overflow-hidden">
           { isPending
             ? Array.from(Array(16).keys()).map((item) => (

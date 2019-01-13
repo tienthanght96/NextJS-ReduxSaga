@@ -49,8 +49,6 @@ export default function Footer({ categories, newestList }) {
             <List
               itemLayout="horizontal"
               dataSource={newestList.slice(0,5) || []}
-              loading={newestList.length < 1}
-              locale=""
               renderItem={item => (
                 <List.Item className="footer__lasted-news__item" style={{ borderBottom: 'none' }}>
                   <Skeleton avatar title={false} active={false} loading={false}>

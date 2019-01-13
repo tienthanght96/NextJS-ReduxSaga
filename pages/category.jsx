@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Head from "../src/components/head";
+// import Head from "../src/components/head";
 import Layout from "../src/components/Layout";
 import { fetchingCategoryArticles } from "../src/category/categoryActions";
 import CategoryIndex from "../src/category/components/CategoryIndex";
@@ -31,9 +31,10 @@ class Category extends Component {
   render() {
     const { id } = this.props.query;
     const { parsedParams } = this.state;
+
     return (
       <Layout>
-        <Head title="Danh mục" />
+        
         <CategoryIndex category_id={id || parsedParams.id}/>
       </Layout>
     );

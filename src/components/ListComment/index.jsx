@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import { isEmpty, map, isEqual } from 'lodash';
-import { List, Avatar, Button, Skeleton, message, Spin } from 'antd'
-import { getDataFirebase, saveDataFirebase, removeDataFirebase } from '../../lib/firebaseLib'
+import { message } from 'antd'
+import { getDataFirebase, removeDataFirebase } from '../../lib/firebaseLib'
 import FormComment from '../FormComment';
 import CommentItem from './CommentItem'
+import { Loading } from '../Loading';
 
 const count = 3
 
@@ -102,8 +103,8 @@ class ListComment extends React.PureComponent {
 				</div>
 				{	initLoading
 					? <div className="has-text-centered">
-							<div><Spin /></div>
-							<p className="has-text-primary">Đang tải...</p>
+							<div><Loading /></div>
+							<p className="has-text-danger">Đang tải...</p>
 						</div>
 					: list.length > 0
 					?	list.map(comment =>
@@ -114,7 +115,7 @@ class ListComment extends React.PureComponent {
 								onDeleteCommentSuccess={this.handleDeleteCommentSuccess}
 							/>
 						)
-					: <div className="has-text-centered">Không có bình luận !</div>
+					: <div className="has-text-centered has-text-danger">Trở thành người bình luận đầu tiên !</div>
 				}
 				<FormComment article_id={article_id} onSubmitCommentSuccess={this.handleSubmitCommentSuccess}/>
 			</div>

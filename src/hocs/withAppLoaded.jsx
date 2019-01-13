@@ -5,27 +5,22 @@ import { connect } from 'react-redux'
 import { appLoadedSelector } from '../root/rootSelector'
 import { appLoaded } from '../root/rootActions';
 import { userSelector, isFetchedFavoriteCategoriesSelector } from '../user/userSelector';
+import { Loading } from '../components/Loading';
 
 export const withAppLoaded = (ComposedComp) => {
   class AppLoadedWrapper extends React.Component {
     
     render(){
       const { appLoaded, user, isFetchedFavoriteCategories } = this.props;
-      // if(!appLoaded) {
-      //   return (
-      //     <div className="loading-page" style={{ paddingTop: 100 }}>
-      //       <Spin size="large" />
-      //       <div className="loading-page__text">Đang lấy thông tin...</div>
-      //     </div>
-      //   )
-      // }
+      
       if(appLoaded && user && user.id && isFetchedFavoriteCategories){
         return <ComposedComp {...this.props}/>
       }
 
       return (
-        <div className="loading-page" style={{ paddingTop: 100 }}>
-          <Spin size="large" />
+        <div className="loading-page has-text-centered" style={{ padding: '100px 0' }}>
+          {/* <Spin size="large" /> */}
+          <Loading />
           <div className="loading-page__text">Đang lấy thông tin...</div>
         </div>
       );
