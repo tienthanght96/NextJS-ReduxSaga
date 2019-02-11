@@ -22,18 +22,19 @@ class CategoriesTableFilter extends PureComponent {
   }
 
   handleReset = () => {
-
+    this.props.handleReset();
   }
   
   handleSubmit = () => {
-
+    this.props.handleSubmit();
   }
 
-  onChange = () => {
-
+  onChange = (value) => {
+    this.props.onChange(value);
   }
 
   render() {
+    const { type } = this.props;
     return (
       <Row gutter={24} type="flex" align="middle">
         <Col
@@ -42,10 +43,9 @@ class CategoriesTableFilter extends PureComponent {
           md={{ span: 12 }}
         >
           <div>Top categories: </div>
-          <Select defaultValue="" style={{ minWidth: 200 }} onChange={this.onChange}>
-            <Select.Option value="">All</Select.Option>
-            <Select.Option value="0">Top views of week</Select.Option>
-            <Select.Option value="1">Top views of month</Select.Option>
+          <Select defaultValue="week" style={{ minWidth: 200 }} onChange={this.onChange}>
+            <Select.Option value="week">Top views of week</Select.Option>
+            <Select.Option value="month">Top views of month</Select.Option>
           </Select>
         </Col>
        

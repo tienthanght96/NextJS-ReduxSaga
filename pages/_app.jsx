@@ -12,7 +12,7 @@ import createStore from '../src/store'
 import clientCredentials from '../credentials/client';
 import { dataServerForAnonymousUser } from '../src/utils/utils'
 import { appLoading, appLoaded, fetchCategories } from '../src/root/rootActions';
-import { anonymousLogin } from '../src/lib/firebaseLib';
+import { anonymousLogin, signoutFirebase } from '../src/lib/firebaseLib';
 import { userLoginSuccess, userLogout, userLogin } from '../src/user/userActions';
 import Footer from '../src/components/Footer';
 import { ArticleApi } from '../src/api/ApiService';
@@ -127,26 +127,31 @@ class MyApp extends App {
     }
   }
 
-  autoLoginAnonymousUser = () => {
-    this.props.store && this.props.store.dispatch(userLogout());
-    localStorage.removeItem("user");
-    anonymousLogin(firebaseData => {
-      const firebaseUser = firebaseData.user; 
-      const paramsLogin = {
-        email: dataServerForAnonymousUser.email,
-        username: dataServerForAnonymousUser.username,
-        picture: dataServerForAnonymousUser.picture,
-        token: firebaseUser.uid,
-        type: 2
-      };
-      const dataLogin = {
-        paramsLogin,
-        firebaseUser,
-        authResponseFb: {},
-        callbackLoginSuccess: null,
-      };
-      this.props.store.dispatch(userLogin(dataLogin));
-    });
+  autoLoginAnonymousUser = async () => {
+    try {
+      await signoutFirebase();
+      this.props.store && this.props.store.dispatch(userLogout());
+      localStorage.removeItem("user");
+      anonymousLogin(firebaseData => {
+        const firebaseUser = firebaseData.user; 
+        const paramsLogin = {
+          email: dataServerForAnonymousUser.email,
+          username: dataServerForAnonymousUser.username,
+          picture: dataServerForAnonymousUser.picture,
+          token: firebaseUser.uid,
+          type: 2
+        };
+        const dataLogin = {
+          paramsLogin,
+          firebaseUser,
+          authResponseFb: {},
+          callbackLoginSuccess: null,
+        };
+        this.props.store.dispatch(userLogin(dataLogin));
+      });
+    } catch (error) {
+      
+    }
   }
 
   render() {
@@ -162,7 +167,7 @@ class MyApp extends App {
           <Component {...pageProps} />
           <Footer
             categories={root.categories || []}
-            newestList={newestList}
+            newestList={newestList || []}
           />
         </Provider>
       </Container>

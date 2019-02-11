@@ -6,7 +6,7 @@ class IndexAdminArticles extends Component {
   render() {
     return (
       <LayoutAdmin>
-        <ArticlesList />
+        {props => <ArticlesList {...props}/>}
       </LayoutAdmin>
     );
   }

@@ -41,7 +41,7 @@ class LayoutAdmin extends Component {
                 minHeight: 'calc(100% - 72px)'
               }}
             >
-              { this.props.children }
+              { this.props.children({...this.props}) }
             </Content>
           </Layout>
         </Layout>

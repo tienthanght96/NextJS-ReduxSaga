@@ -29,7 +29,7 @@ export default class BodyContentArticle extends Component {
         <img src="${image.link}" style="max-width: 100%" />
         <div class="has-text-centered">
           <span class="note-image">
-            ${image.description || 'Hình ảnh minh hoạ'}
+            ${image.description || 'Hình ảnh từ internet'}
           </span>
         </div>
       </div>

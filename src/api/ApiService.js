@@ -79,7 +79,7 @@ export const ArticleApi = {
   },
   getDetailArticle: async (article_id, userId = null) => {
     try {
-      const url = userId ? `/article/${userId}/${article_id}` : `/article/${article_id}`;
+      const url = userId ? `/article/${article_id}?userId=${userId}` : `/article/${article_id}`;
       const response = await ApiJavaService.get(url);
       if(response.data && isSuccessRequest(response.status)) {
         return response.data;
@@ -117,6 +117,19 @@ export const ArticleApi = {
     try {
       const url = `/recomendArticles/${article_id}`;
       const params = startIndex ? { startIndex, quantity: 17 } : { quantity: 17 };
+      const response = await ApiPythonService.get(url, { params });
+      if(response.data && isSuccessRequest(response.status)) {
+        return response.data;
+      }
+      throw response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getRecommendTopicArticles: async (user_id, { startIndex, limit }) => {
+    try {
+      const url = `/getRecommentTopicsForUser/${user_id}`;
+      const params = { startIndex, limit };
       const response = await ApiPythonService.get(url, { params });
       if(response.data && isSuccessRequest(response.status)) {
         return response.data;

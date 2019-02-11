@@ -67,10 +67,11 @@ class HomeMostView extends Component {
                     avatar={
                       <div
                         style={{
-                          backgroundImage: `url(${item.picture ||asserts.noImage})`,
+                          backgroundImage: `url(${item.picture ||'/static/img/no_image_available.jpg'})`,
                           backgroundSize: item.picture ? "contain" : "contain",
                           width: 150,
-                          height: 85
+                          height: 85,
+                          borderRadius: 3
                         }}
                       />
                     }

@@ -18,11 +18,18 @@ export function firebaseAuth(accessToken, callback) {
   });
 }
 
+export async function signoutFirebase(){
+  try {
+    return await firebase.auth().signOut();
+  } catch (error) {
+    throw error;
+  }
+}
+
 export function anonymousLogin(callback) {
   firebase.auth().signInAnonymously().then((user) => {
 
     firebase.auth().currentUser.getIdToken().then(result => {
-      console.log('user anonymousLogin', user);
       // console.log('user anonymousLogin result TOKEN', result);
     })
 

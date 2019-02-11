@@ -6,7 +6,7 @@ class IndexAdminCategories extends Component {
   render() {
     return (
       <LayoutAdmin>
-        <CategoriesList />
+        {(props) => <CategoriesList {...props}/>}
       </LayoutAdmin>
     );
   }

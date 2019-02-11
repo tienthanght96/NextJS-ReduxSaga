@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { isEmpty, isEqual } from 'lodash';
 import { toggleModalPersonalize, toggleModalOverflow, toggleModalLogin } from "../../modal/modalActions";
 import { userLogout, userLogin } from "../../user/userActions";
-import { anonymousLogin } from '../../lib/firebaseLib';
+import { anonymousLogin, signoutFirebase } from '../../lib/firebaseLib';
 import { dataServerForAnonymousUser } from "../../utils/utils";
 // import SearchInput from "./SearchInput";
 // import { UPDATE_MODAL_PESONALIZE, UPDATE_MODAL_LOGIN, UPDATE_MODAL_OVERLAY, UPDATE_USER_LOG_OUT, UPDATE_FAVORITE_CATEGORY, UPDATE_USER_LOGIN_SUCCESS } from "../../actions";
@@ -159,27 +159,32 @@ class HeaderContainer extends PureComponent {
     this.setState({ keyword });
   }
 
-  handleLogout = () => {
-    localStorage.removeItem("user");
-    this.props.userLogout();
-    this.toggleModalOverlay(true, {});
-    anonymousLogin(firebaseData => {
-      const firebaseUser = firebaseData.user; 
-      const paramsLogin = {
-        email: dataServerForAnonymousUser.email,
-        username: dataServerForAnonymousUser.username,
-        picture: dataServerForAnonymousUser.picture,
-        token: firebaseUser.uid,
-        type: 2
-      };
-      const dataLogin = {
-        paramsLogin,
-        firebaseUser,
-        authResponseFb: {},
-        callbackLoginSuccess: null,
-      };
-      this.props.userLogin(dataLogin);
-    });
+  handleLogout = async () => {
+    try {
+      await signoutFirebase();
+      localStorage.removeItem("user");
+      this.props.userLogout();
+      this.toggleModalOverlay(true, {});
+      anonymousLogin(firebaseData => {
+        const firebaseUser = firebaseData.user; 
+        const paramsLogin = {
+          email: dataServerForAnonymousUser.email,
+          username: dataServerForAnonymousUser.username,
+          picture: dataServerForAnonymousUser.picture,
+          token: firebaseUser.uid,
+          type: 2
+        };
+        const dataLogin = {
+          paramsLogin,
+          firebaseUser,
+          authResponseFb: {},
+          callbackLoginSuccess: null,
+        };
+        this.props.userLogin(dataLogin);
+      });
+    } catch (error) {
+      
+    }
   }
 
   toggleModalOverlay = (isOpenModal, dataModal = {}) => {

@@ -23,7 +23,7 @@ const ArticleCard = ({ article, type, onHandleBookmarkSuccess }) => {
 							<div
 								className="post-image-lazy horizontal"
 								style={{
-									backgroundImage: `url(${article.picture || asserts.noImage})`,
+									backgroundImage: `url(${article.picture || '/static/img/no_image_available.jpg'})`,
 									backgroundSize: article.picture ? 'cover' : 'contain' 
 								}}
 							>
@@ -115,7 +115,7 @@ const ArticleCard = ({ article, type, onHandleBookmarkSuccess }) => {
 							<div
 								className="post-image-lazy"
 								style={{
-									backgroundImage: `url(${article.picture || asserts.noImage})`,
+									backgroundImage: `url(${article.picture || '/static/img/no_image_available.jpg'})`,
 									backgroundSize: article.picture ? 'cover' : 'contain' 
 								}}
 							>

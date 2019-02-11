@@ -5,7 +5,7 @@ import moment from "moment";
 import { withRouter } from "next/router";
 import Link from 'next/link'
 import { Row, Col, Spin } from "antd";
-
+import Head from '../../../src/components/head'
 import BodyContentArticle from "./BodyContentArticle";
 import ListComment from "../../components/ListComment";
 import ButtonBookmark from "../../components/ButtonBookmark";
@@ -59,6 +59,7 @@ class ArticleDetail extends Component {
 
     return (
       <div className="article-detail-container" type="flex" justify="start">
+        <Head title={articleDetail.title}/>
         <article className="article-detail">
           <section className="article-detail__header">
             <h1 className="title">{articleDetail.title || ''}</h1>

@@ -51,7 +51,7 @@ class SidebarAdmin extends PureComponent {
       >
         <div className="brand">
           <div className="logo" onClick={() => console.log(collapsed)}>
-            <img alt="logo" src="https://antd-admin.zuiidea.com/logo.svg" />
+            <img style={{ maxWidth: 40, marginRight: 10, position: 'relative', }} src="/static/img/bold-news-logo-red.png"/>
             {collapsed ? null : <h1>News Admin</h1>}
           </div>
         </div>

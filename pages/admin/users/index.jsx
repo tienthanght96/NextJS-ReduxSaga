@@ -6,7 +6,7 @@ class IndexAdminUsers extends Component {
   render() {
     return (
       <LayoutAdmin>
-        <UserList />
+        {props => <UserList {...props}/>}
       </LayoutAdmin>
     );
   }

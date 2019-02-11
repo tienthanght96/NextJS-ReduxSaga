@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Head from "../src/components/head";
+// import Head from "../src/components/head";
 import Layout from "../src/components/Layout";
 import ArticleIndex from "../src/article/components/ArticleIndex";
-import { fetchingArticle } from "../src/article/articleActions";
 import queryString from 'query-string';
 
 class Article extends Component {
@@ -32,7 +31,7 @@ class Article extends Component {
     const { parsedParams } = this.state;
     return (
       <Layout>
-        <Head title="Bài viết" />
+        {/* <Head title="Bài viết" /> */}
         <ArticleIndex article_id={id || parsedParams.id}/>
       </Layout>
     );

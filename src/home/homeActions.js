@@ -15,6 +15,9 @@ export const FETCHED_TOP_CATEGORY= 'FETCHED_TOP_CATEGORY';
 export const SET_LIST_CATEGORY_FETCH= 'SET_LIST_CATEGORY_FETCH';
 export const RESET_LIST_CATEGORY_FETCH= 'RESET_LIST_CATEGORY_FETCH';
 
+export const FETCH_RECOMMEND_TOPIC= 'FETCH_RECOMMEND_TOPIC';
+export const FETCHING_RECOMMEND_TOPIC= 'FETCHING_RECOMMEND_TOPIC';
+export const FETCHED_RECOMMEND_TOPIC= 'FETCHED_RECOMMEND_TOPIC';
 
 export const fetchMostView = ({ limit }) => ({
   type: FETCH_MOST_VIEW,
@@ -76,4 +79,15 @@ export const fetchedTopCategory = ({ category_id, list }) => ({
     category_id,
     list,
   }
+});
+
+export const fetchRecommendTopic = () => ({
+  type: FETCH_RECOMMEND_TOPIC,
+});
+export const fetchingRecommendTopic = () => ({
+  type: FETCHING_RECOMMEND_TOPIC
+});
+export const fetchedRecommendTopic = (data = []) => ({
+  type: FETCHED_RECOMMEND_TOPIC,
+  data
 });

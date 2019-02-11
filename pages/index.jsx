@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../src/components/Layout";
-import Head from "../src/components/head";
 import HomeIndex from "../src/home/components/HomeIndex";
 import { fetchingNewest, fetchingMostView } from "../src/home/homeActions";
 
@@ -14,7 +13,6 @@ class Home extends React.Component {
   render() {
     return (
       <Layout>
-        <Head title="Trang chủ" />
         <HomeIndex />
       </Layout>
     );

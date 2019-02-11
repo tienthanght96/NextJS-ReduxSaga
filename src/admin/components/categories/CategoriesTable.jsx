@@ -61,25 +61,30 @@ class CategoriesTable extends Component {
     return [
       {
         title: "ID",
-        dataIndex: "key",
-        key: "key",
+        dataIndex: "id",
+        rowKey: "category_id",
       },
       {
         title: "Name",
         dataIndex: "name",
-        key: "name",
+        rowKey: "category_name",
         // render: text => <a href="javascript:;">{text}</a>
         ...this.getColumnSearchProps('name'),
       },
       {
         title: "Code",
         dataIndex: "code",
-        key: "code"
+        rowKey: "category_code"
+      },
+      {
+        title: "Total views",
+        dataIndex: "view",
+        rowKey: "category_view"
       },
       {
         title: "Icon",
         dataIndex: "icon",
-        key: "icon",
+        rowKey: "category_icon",
         render: text => (
           <i
             className={`icon ion-ios-${text}`}
@@ -97,17 +102,10 @@ class CategoriesTable extends Component {
 
   getData = () => {
     const { categories } = this.props;
-    if(!categories || categories.lenght < 1) {
+    if(!categories || categories.length < 1) {
       return [];
     }
-    return categories.map(category => (
-      {
-        key: category.id,
-        name: category.name,
-        code: category.code,
-        icon: category.icon
-      }
-    ));
+    return categories;
   };
   
   render() {
@@ -121,8 +119,9 @@ class CategoriesTable extends Component {
           dataSource={data}
           bordered
           className="table"
+          loading={this.props.isLoading}
           pagination={{
-            size: 10,
+            size: data.length,
             style: {
               display: "none"
             }

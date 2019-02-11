@@ -4,7 +4,11 @@ import { APP_LOADED } from '../root/rootActions';
 import { ArticleApi } from '../api/ApiService';
 import {
   fetchedMostView, fetchedNewest, fetchingMostView,
-  fetchingNewest, FETCH_NEWEST, FETCH_MOST_VIEW, FETCHED_MORE_NEWEST, fetchedMoreNewest, fetchMoreNewestError, FETCH_MORE_NEWEST, FETCH_TOP_CATEGORY, fetchedTopCategory, fetchingTopCategory, setListCategoryFetch, resetListTopCategory,
+  fetchingNewest, FETCH_NEWEST, FETCH_MOST_VIEW,
+  fetchedMoreNewest, fetchMoreNewestError,
+  FETCH_MORE_NEWEST, FETCH_TOP_CATEGORY, fetchedTopCategory,
+  setListCategoryFetch, resetListTopCategory,
+  fetchingRecommendTopic, fetchedRecommendTopic, FETCH_RECOMMEND_TOPIC,
 } from './homeActions';
 import { getNewestSeletor, getTopCategorySelector } from './homeSelector';
 import { userSelector, userFavoriteCategoriesSelector } from '../user/userSelector';
@@ -105,6 +109,22 @@ function* getTopCategory(){
   yield all(map(topCategoryArticles, item => call(loadTopCategoryItem, item)));
 }
 
+function* getRecommendTopic() {
+  const user = yield select(userSelector);
+  const userId = user && user.id ? user.id : null;
+  // yield take(APP_LOADED);
+  yield put(fetchingRecommendTopic());
+  try {
+
+    const response = yield call(ArticleApi.getRecommendTopicArticles, userId, { startIndex: 0, limit: 6 });
+    console.log('response', response)
+    yield put(fetchedRecommendTopic(response));
+  } catch (error) {
+    console.log(error)
+    yield put(fetchedRecommendTopic([]));
+  }
+}
+
 function* watchGetMostView() {
   yield takeLatest([FETCH_MOST_VIEW, USER_LOGIN_SUCCESS], getMostView)
 }
@@ -120,11 +140,16 @@ function* watchGetTopCategory() {
   yield takeLatest(FETCH_TOP_CATEGORY, getTopCategory)
 }
 
+function* watchGetRecommendTopic() {
+  yield takeLatest(FETCH_RECOMMEND_TOPIC, getRecommendTopic)
+}
+
 export function* homeSaga(){
   yield all([
     watchGetMostView(),
     watchGetNewest(),
     watchGetMoreNewest(),
     watchGetTopCategory(),
+    watchGetRecommendTopic()
   ])
 }

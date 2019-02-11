@@ -107,7 +107,7 @@ class ArticlesTable extends Component {
       {
         title: "Comments",
         dataIndex: "id",
-        key: "id",
+        key: "comment",
         render: text => <TotalCommentArticle article_id={text} isHideIcon={true}/>
       },
       {
@@ -151,11 +151,7 @@ class ArticlesTable extends Component {
   };
 
   getData = () => {
-    return fake_data_articles.map(article => ({
-      ...article,
-      key: article.id,
-      date: moment(article.date).format("DD-MM-YYYY")
-    }));
+    return [];
   };
   
   render() {
