@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Row, Col } from "antd";
 import Link from 'next/link'
-import { asserts } from "../../utils/config";
 
 class QuoteOtherArticle extends Component {
   render() {
     const { firstRelativeArticle } = this.props;
-    console.log('firstRelativeArticle', firstRelativeArticle)
     if(!firstRelativeArticle) return <div />
     return (
       <div className="quote-other">
@@ -20,7 +18,7 @@ class QuoteOtherArticle extends Component {
         <Row type="flex" justify="start">
           <Col xs={10} sm={10}>
             <div className="quote-other__image">
-              <img src={firstRelativeArticle.picture || asserts.noImage}/>
+              <img src={firstRelativeArticle.picture || `/static/img/no_image_available.jpg`}/>
             </div>
           </Col>
           <Col xs={14} sm={14}>

@@ -144,7 +144,7 @@ export default withRouter(class Footer extends React.Component{
                     }}
                   >
                     <a>
-                      <Tag color="#108ee9">{item.name}</Tag>
+                      <Tag color="#e51515">{item.name}</Tag>
                     </a>
                   </Link>
                 ))

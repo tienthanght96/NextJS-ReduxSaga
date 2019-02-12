@@ -5,6 +5,7 @@ import { modalReducer } from './modal/modalReducer';
 import { userReducer } from './user/userReducer';
 import { categoryReducer } from './category/categoryReducer';
 import { articleReducer } from './article/articleReducer';
+import { tagsReducer } from './tags/tagsReducer';
 
 export const appReducer = combineReducers({
   root: rootReducer,
@@ -13,4 +14,5 @@ export const appReducer = combineReducers({
   user: userReducer,
   category: categoryReducer,
   article: articleReducer,
+  tags: tagsReducer
 });

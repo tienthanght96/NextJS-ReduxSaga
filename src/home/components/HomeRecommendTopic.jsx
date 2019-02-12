@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { map } from 'lodash'
 import ContentLoader from "react-content-loader";
-import { formatCommentReplyTime } from "../../utils/utils";
-import ArticleCard from "../../components/ArticleCard";
+import { formatCommentReplyTime, replaceSizeImage } from "../../utils/utils";
 import { fetchRecommendTopic } from "../homeActions";
 import { getRecommendTopicSelector } from "../homeSelector";
 import HomeHeaderTopCategory from './HomeHeaderTopCategory';
-import { Row, Col } from "antd";
+import { Row, Col, List, Skeleton } from "antd";
 import { userFavoriteCategoriesSelector } from "../../user/userSelector";
+import { LargeRecommendCard } from "../../components/ArticleCard/LargeRecommendCard";
+import { SmallRecommendCard } from "../../components/ArticleCard/SmallRecommandCard";
 
 const Loader = () => (
   <ContentLoader 
@@ -29,26 +29,27 @@ const Loader = () => (
 );
 
 const HomeRecommendTopicItem = ({ isPending, list, ...rest }) => {
+  if(!Array.isArray(list) || list.length < 1) return null;
+  const litsFormatTime = list.map(ele => ({
+    ...ele,
+    picture: replaceSizeImage(ele.picture),
+    date: formatCommentReplyTime(new Date(ele.date).getTime() / 1000)
+  }))
+  
+  const largeCard = litsFormatTime[0];
+  const smallList = litsFormatTime.slice(1, 5);
   return (
     <div>
       <HomeHeaderTopCategory
         title={rest.tagName}
+        linkProps={{
+          // as:`/category/${rest.code}`,
+          href:`/tags?tag=${rest.tagName}`
+        }}
       />
       <Row type="flex" justify="start" >
-      {  list.map((article) => {
-          return (
-            <ArticleCard
-              type='vertical'
-              article={{
-                ...article,
-                date: formatCommentReplyTime(article.date  / 1000),
-                article: rest.category
-              }}
-              key={article.id}
-            />
-          );   
-        })
-      }
+        <LargeRecommendCard article={largeCard}/>
+        <SmallRecommendCard articles={smallList}/>
       </Row>
     </div>
   );
@@ -64,18 +65,49 @@ class HomeTopCategory extends Component {
     }
   }
   render() {
-    console.log(this.props)
     const { list, isPending } = this.props.recommendTopic;
     return (
       <div>
+        <div className="recommend-alert">
+          <img src="/static/img/icons8-prize-64.png"/>
+          <span className="recommend__title">Đề xuất </span>
+        </div>
         { (isPending)
           ? <Row type="flex" justify="start" className="overflow-hidden">
-              { [1,2,3,4].map((item) => (
-                  <Col key={item} sm={6} md={6} lg={6}  style={{padding: '1rem 1rem 1rem 0'}}>
-                    <Loader/>
-                  </Col>
-                ))
-              }
+              <Col sm={24} md={10} lg={10} style={{ padding: '1rem 1rem 1rem 0' }}>
+                <Loader/>
+              </Col>
+              <Col sm={24} md={14} lg={14} style={{ padding: '1rem 1rem 1rem 0' }} >
+              <List
+                itemLayout="horizontal"
+                dataSource={[1, 2, 3, 4]}
+                locale={{
+                  emptyText: ""
+                }}
+                renderItem={item => (
+                  <List.Item>
+                    <Skeleton avatar title={true} loading={true} active>
+                      <List.Item.Meta
+                        avatar={
+                          <div
+                            style={{
+                              // backgroundImage: `url(${item.picture ||'/static/img/no_image_available.jpg'})`,
+                              // backgroundSize: item.picture ? "contain" : "contain",
+                              width: 150,
+                              height: 85,
+                              borderRadius: 3
+                            }}
+                          />
+                        }
+                        title={
+                          <a className="has-text-weight-bold title-article" />
+                        }
+                      />
+                    </Skeleton>
+                  </List.Item>
+                )}
+              />
+              </Col>
             </Row>
           :  list.map((topic, index) => (
               <HomeRecommendTopicItem

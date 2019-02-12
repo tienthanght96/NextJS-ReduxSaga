@@ -4,6 +4,7 @@ import { homeSaga } from './home/homeSaga';
 import { userSaga } from './user/userSaga';
 import { categorySaga } from './category/categorySaga';
 import { articleSaga } from './article/articleSaga';
+import { tagsSaga } from './tags/tagsSaga';
 export function* appSaga(){
   yield all([
     rootSaga(),
@@ -11,6 +12,7 @@ export function* appSaga(){
     userSaga(),
     categorySaga(),
     articleSaga(),
+    tagsSaga()
   ])
 }
 

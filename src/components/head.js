@@ -18,7 +18,7 @@ const Head = props => (
     {/* <link rel="icon" sizes="192x192" href="/static/touch-icon.png" /> */}
     {/* <link rel="apple-touch-icon" href="/static/touch-icon.png" /> */}
     <meta property="og:url" content={props.url || defaultOGURL} />
-    <meta property="og:title" content={props.title || ''} />
+    <meta property="og:title" content={props.title || 'Megga News - Website tổng hợp và cá nhân hoá đọc báo'} />
     <meta
       property="og:description"
       content={props.description || defaultDescription}

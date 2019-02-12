@@ -3,8 +3,8 @@ export const IS_JAVA_API = 'IS_JAVA_API';
 export const IS_PYTHON_API = 'IS_PYTHON_API';
 
 // export const API_JAVA_URL = 'https://newsjavaapi.azurewebsites.net';
-export const API_JAVA_URL = 'http://localhost:8080/';
-export const API_PYTHON_URL = 'http://localhost:8181/python_api';
+export const API_JAVA_URL = 'http://192.168.43.198:8080';
+export const API_PYTHON_URL = 'http://192.168.43.198:8181/python_api';
 
 export const BASE_URL = API_JAVA_URL;
 const CancelToken = axios.CancelToken;
@@ -131,6 +131,18 @@ export const ArticleApi = {
       const url = `/getRecommentTopicsForUser/${user_id}`;
       const params = { startIndex, limit };
       const response = await ApiPythonService.get(url, { params });
+      if(response.data && isSuccessRequest(response.status)) {
+        return response.data;
+      }
+      throw response;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getRecommendTagsArticles: async (tag, params) => {
+    try {
+      const url = `/article/getArticleByTag/${tag}`;
+      const response = await ApiJavaService.get(url, { params });
       if(response.data && isSuccessRequest(response.status)) {
         return response.data;
       }

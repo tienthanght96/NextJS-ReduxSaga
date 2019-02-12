@@ -10,17 +10,24 @@ class HeaderCategory extends Component {
 		};
 	}
 	render() {
-		const { title, isPin, onPinCategory, href, linkProps } = this.props;
+		const { title, href, icon, linkProps } = this.props;
 		return (
 			<div className="box-title flex-row-space-between">
-				<h2 className="title-left">{title}</h2>
+				<h2 className="title-left">
+				{	icon &&
+						<i
+							className={`icon ion-ios-${icon}`}
+							style={{
+								fontSize: 20,
+								marginRight: 10,
+								position: "relative",
+								top: 2
+							}}
+						/>
+				}
+					{title}
+				</h2>
 				<div className="right-box-title">
-					{/* <div className="pin-category" 
-						onClick={() =>{
-						}}
-					>
-						<Icon type="pushpin-o" className="header-category-icon" />
-					</div> */}
 					<Link {...linkProps}>
 						<a className="right-box-title-link" >
 							<span>Xem thêm</span>

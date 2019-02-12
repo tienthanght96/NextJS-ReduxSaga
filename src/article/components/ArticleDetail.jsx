@@ -12,8 +12,9 @@ import ButtonBookmark from "../../components/ButtonBookmark";
 import { fetchArticle } from "../articleActions";
 import { ArticleApi } from "../../api/ApiService";
 import { articleDetailSelector, isPendingArticleDetailSelector, relativeArticlesSelector } from "../articleSelector";
-import { formatCommentReplyTime } from "../../utils/utils";
+import { formatCommentReplyTime, getTags } from "../../utils/utils";
 import { Loading } from "../../components/Loading";
+import { Tags } from "./Tags";
 
 class ArticleDetail extends Component {
 
@@ -146,6 +147,7 @@ class ArticleDetail extends Component {
               }
           </section>
         </article>
+        <Tags tags={getTags(articleDetail.tags)}/>
         <ListComment article_id={articleDetail.id}/>
       </div>
     );
